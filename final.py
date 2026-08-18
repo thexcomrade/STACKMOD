@@ -1,4 +1,4 @@
-# import numpy as np #data collection ilotu maatan vendi
+# import numpy as np  # data collection
 
 # a = [1,2,3,4,5]
 # x=np.array(a)  #list to array
