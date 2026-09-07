@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bethlehem Kudumba Unit - Sahara Cinema</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&family=Manrope:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-primary": "#ffffff",
+            tertiary: "#8c3c3c",
+            background: "#faf5ee",
+            surface: "#faf5ee",
+            primary: "#c2652a",
+            "outline-variant": "#d8d0c8",
+            "tertiary-fixed-dim": "#e8a0a0",
+            "on-primary-fixed": "#401a08",
+            "surface-container-high": "#ece6dc",
+            "primary-fixed-dim": "#f0a878",
+            "on-secondary-container": "#605850",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#fce0e0",
+            "on-primary-container": "#fbe8d8",
+            "inverse-surface": "#3a302a",
+            "surface-container-low": "#f6f0e8",
+            "on-background": "#3a302a",
+            "inverse-on-surface": "#faf5ee",
+            "on-secondary": "#ffffff",
+            "on-tertiary-fixed-variant": "#6e3030",
+            "on-secondary-fixed": "#2a2420",
+            secondary: "#78706a",
+            "secondary-fixed-dim": "#cec6be",
+            "on-error": "#ffffff",
+            "surface-container-highest": "#e6e0d6",
+            "on-tertiary-fixed": "#2e1515",
+            "tertiary-container": "#d47070",
+            "on-error-container": "#7a1a10",
+            "surface-container": "#f2ece4",
+            "surface-dim": "#dcd6cc",
+            "on-surface": "#3a302a",
+            "error-container": "#fce4e0",
+            "secondary-fixed": "#eae2da",
+            "on-tertiary-container": "#3a2020",
+            "on-surface-variant": "#605850",
+            "inverse-primary": "#f0a878",
+            "on-primary-fixed-variant": "#8a4518",
+            "surface-variant": "#ece6dc",
+            "surface-container-lowest": "#ffffff",
+            "surface-bright": "#faf5ee",
+            "primary-fixed": "#fbe8d8",
+            outline: "#9a9088",
+            "on-secondary-fixed-variant": "#504840",
+            "surface-tint": "#c2652a",
+            "secondary-container": "#eae2da",
+            "primary-container": "#e08850",
+            error: "#c0392b"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          },
+          fontFamily: {
+            headline: ["EB Garamond", "serif"],
+            display: ["EB Garamond", "serif"],
+            body: ["Manrope", "sans-serif"],
+            label: ["Manrope", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    .drop-cap::first-letter {
+      float: left;
+      font-size: 4rem;
+      line-height: 0.8;
+      padding-right: 0.5rem;
+      padding-top: 0.2rem;
+      font-family: "EB Garamond", serif;
+      color: #c2652a;
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      background-color: #faf5ee;
+      color: #3a302a;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .font-headline {
+      font-family: "EB Garamond", serif;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-background min-h-screen flex flex-col pt-24 pb-20 md:pb-0">
+
+  <!-- Top Navigation -->
+  <nav
+    class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-4 max-w-full bg-background/80 backdrop-blur-md shadow-sm dark:shadow-none hidden md:flex"
+  >
+    <div class="font-headline text-2xl font-bold text-primary dark:text-primary-fixed-dim">
+      Sahara
+    </div>
+
+    <ul class="flex space-x-8 font-body text-sm font-medium">
+      <li>
+        <a
+          class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-300"
+          href="#"
+        >
+          Discover
+        </a>
+      </li>
+
+      <li>
+        <a
+          class="text-primary dark:text-primary-fixed-dim border-b border-primary transition-all duration-200 active:opacity-80"
+          href="#"
+        >
+          Theaters
+        </a>
+      </li>
+
+      <li>
+        <a
+          class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-300"
+          href="#"
+        >
+          Upcoming
+        </a>
+      </li>
+
+      <li>
+        <a
+          class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-300"
+          href="#"
+        >
+          Journal
+        </a>
+      </li>
+    </ul>
+
+    <div class="flex items-center space-x-4">
+      <button class="text-on-surface-variant hover:text-primary transition-colors duration-300">
+        <span class="material-symbols-outlined">account_circle</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Bottom Navigation Mobile -->
+  <nav
+    class="fixed bottom-0 w-full z-50 md:hidden flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-low dark:bg-surface-container-high border-t border-outline-variant/30 shadow-[0_-2px_16px_rgba(58,48,42,0.04)] rounded-t-xl"
+  >
+    <a
+      class="flex flex-col items-center justify-center text-on-secondary-container dark:text-on-secondary-container hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 p-2 rounded-xl"
+      href="#"
+    >
+      <span class="material-symbols-outlined mb-1">home</span>
+      <span class="font-body text-xs font-medium">Home</span>
+    </a>
+
+    <a
+      class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-container text-on-primary-container rounded-xl px-4 py-1 hover:bg-surface-container-highest transition-colors active:scale-95 duration-150"
+      href="#"
+    >
+      <span class="material-symbols-outlined mb-1">movie_filter</span>
+      <span class="font-body text-xs font-medium">Movies</span>
+    </a>
+
+    <a
+      class="flex flex-col items-center justify-center text-on-secondary-container dark:text-on-secondary-container hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 p-2 rounded-xl"
+      href="#"
+    >
+      <span class="material-symbols-outlined mb-1">confirmation_number</span>
+      <span class="font-body text-xs font-medium">Tickets</span>
+    </a>
+
+    <a
+      class="flex flex-col items-center justify-center text-on-secondary-container dark:text-on-secondary-container hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 p-2 rounded-xl"
+      href="#"
+    >
+      <span class="material-symbols-outlined mb-1">person</span>
+      <span class="font-body text-xs font-medium">Profile</span>
+    </a>
+  </nav>
+
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+
+    <!-- Hero Section -->
+    <section class="mt-8 mb-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+      <div class="lg:col-span-5 order-2 lg:order-1 space-y-6">
+        <div class="space-y-2">
+          <h1 class="font-headline text-5xl md:text-6xl font-bold leading-tight text-on-surface tracking-tight">
+            Bethlehem Kudumba Unit
+          </h1>
+
+          <p class="font-body text-lg text-on-surface-variant flex items-center space-x-3">
+            <span>2026</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+            <span>2h 37m</span>
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2 pt-2">
+          <span class="px-3 py-1 text-xs font-medium uppercase tracking-wider border border-outline-variant rounded-full text-on-surface-variant">
+            Malayalam
+          </span>
+
+          <span class="px-3 py-1 text-xs font-medium uppercase tracking-wider border border-outline-variant rounded-full text-on-surface-variant">
+            Comedy
+          </span>
+
+          <span class="px-3 py-1 text-xs font-medium uppercase tracking-wider border border-outline-variant rounded-full text-on-surface-variant">
+            Drama
+          </span>
+
+          <span class="px-3 py-1 text-xs font-medium uppercase tracking-wider border border-outline-variant rounded-full text-on-surface-variant">
+            Romance
+          </span>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 order-1 lg:order-2">
+        <div
+          class="relative w-full aspect-[4/3] md:aspect-video rounded-2xl overflow-hidden shadow-[0_4px_24px_rgba(58,48,42,0.08)] group"
+        >
+          <img
+            alt="Movie Poster"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-SubUm2_Roq96FWqZJyMXlLQC7h8YtGIPsHWmswBMEfIEeU5Qf-rcIw3UeqjnhddVRPG40H87Rznma8KADYCyExjPL3aw8ehqeBMwiFHfUfuzWFGCkRFBU7A_wgdNSeR8iZb2wXU_WjEOqVMYCtZu9092qO_is_-RlNSz-oEJ2M1jBSWbThEp3WNKc7jyHVq7JDrdWAebNM_Vbqlny-RL99efwBr-RFhoI8in0eQqTjoPW_AGdxoOfg"
+          />
+
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Synopsis & Ticketing Grid -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-24">
+
+      <!-- Synopsis -->
+      <div class="lg:col-span-2 space-y-6">
+        <h2 class="font-headline text-3xl font-medium text-on-surface border-b border-outline-variant/40 pb-4">
+          Synopsis
+        </h2>
+
+        <div class="prose prose-lg prose-p:font-body prose-p:text-on-surface-variant prose-p:leading-relaxed max-w-none">
+          <p class="drop-cap">
+            After years apart pursuing their respective careers, childhood sweethearts Ashley and Justin find themselves unexpectedly reunited when they both return to their quaint hometown for a massive, chaotic family gathering—the Bethlehem Kudumba Unit's annual festival. Amidst meddling relatives, rekindled inside jokes, and the unavoidable nostalgia of their shared past, they must navigate the delicate balance of their current independent lives and the undeniable spark that still exists between them. This heartwarming tale explores the complexities of modern love rooted in deep traditions, blending humor and romance in a beautifully sunlit setting.
+          </p>
+        </div>
+      </div>
+
+      <!-- Ticketing / Concessions -->
+      <div class="lg:col-span-1">
+        <div class="sticky top-32 space-y-8">
+
+          <!-- Buy Tickets -->
+          <div
+            class="bg-surface-container-low rounded-2xl p-8 border border-outline-variant/30 shadow-[0_2px_16px_rgba(58,48,42,0.04)]"
+          >
+            <h3 class="font-headline text-2xl font-medium text-on-surface mb-6">
+              In Theaters
+            </h3>
+
+            <div class="space-y-4 mb-8">
+              <div>
+                <p class="text-sm font-medium text-on-surface-variant mb-2">
+                  Today, Oct 24
+                </p>
+
+                <div class="flex flex-wrap gap-2">
+                  <button
+                    class="px-4 py-2 text-sm font-medium border border-outline-variant rounded-lg text-on-surface hover:border-primary hover:text-primary transition-colors"
+                  >
+                    12:30 PM
+                  </button>
+
+                  <button
+                    class="px-4 py-2 text-sm font-medium bg-primary text-on-primary rounded-lg shadow-sm hover:bg-primary-fixed-variant transition-colors"
+                  >
+                    3:45 PM
+                  </button>
+
+                  <button
+                    class="px-4 py-2 text-sm font-medium border border-outline-variant rounded-lg text-on-surface hover:border-primary hover:text-primary transition-colors"
+                  >
+                    7:15 PM
+                  </button>
+
+                  <button
+                    class="px-4 py-2 text-sm font-medium border border-outline-variant rounded-lg text-on-surface hover:border-primary hover:text-primary transition-colors"
+                  >
+                    10:00 PM
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="w-full py-4 bg-primary text-on-primary font-medium text-lg rounded-xl shadow-md hover:bg-primary-fixed-variant hover:shadow-lg transition-all active:scale-[0.98]"
+            >
+              Buy Tickets
+            </button>
+          </div>
+
+          <!-- Concessions -->
+          <div
+            class="bg-surface-container-low rounded-2xl p-6 border border-outline-variant/30 shadow-[0_2px_16px_rgba(58,48,42,0.04)]"
+          >
+            <h3 class="font-headline text-xl font-medium text-on-surface mb-4 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">local_cafe</span>
+              Concessions
+            </h3>
+
+            <ul class="space-y-3 font-body text-sm">
+              <li class="flex justify-between items-center border-b border-outline-variant/20 pb-2">
+                <span class="text-on-surface">Artisan Coffee (500 gms)</span>
+                <span class="text-on-surface-variant font-medium">$14.00</span>
+              </li>
+
+              <li class="flex justify-between items-center pb-1">
+                <span class="text-on-surface">Fresh Milk (1 ltr Tetra Pack)</span>
+                <span class="text-on-surface-variant font-medium">$4.50</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multimedia -->
+    <section class="mb-24">
+      <h2 class="font-headline text-3xl font-medium text-on-surface mb-8">
+        Trailers &amp; Clips
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Main Trailer -->
+        <div
+          class="md:col-span-2 relative aspect-video rounded-2xl overflow-hidden bg-inverse-surface group cursor-pointer shadow-[0_2px_16px_rgba(58,48,42,0.06)] border border-outline-variant/20"
+        >
+          <img
+            alt="Trailer Thumbnail"
+            class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2B8ktlsFPCXDY4HCobKCnG6Mti2KLtPpToRSxHtC83Hw_2uMwihU45-SH6DFF9zx0OUhViPXNVwaFDyE-5OIGESszlzoyi61jiQrwForqPb5UfKzdHgy1NUmNFsvbsCwBnK2wxvC3BAzsDoLnwOrl0w_o7yzkNap_rAeNiPANqWQCCJEusEQTj91uOjsH_xiF4NzOULWAb8ZsR9nn92mJHKESP1G4yXklY1CdttBmEaf03Gcdiv2qDg"
+          />
+
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div
+              class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform duration-300"
+            >
+              <span
+                class="material-symbols-outlined text-white text-3xl"
+                style="font-variation-settings: 'FILL' 1;"
+              >
+                play_arrow
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Supplementary Clips -->
+        <div class="grid grid-cols-2 md:grid-cols-1 gap-6">
+
+          <div
+            class="relative aspect-video md:aspect-auto md:h-full rounded-2xl overflow-hidden bg-inverse-surface group cursor-pointer border border-outline-variant/20"
+          >
+            <img
+              alt="Clip 1"
+              class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQknnjk9KxI9BoNHq749RSJAY9744SHVudXSZG73Mzs4mXumyi2t_kjno2cJyMpFgsyciupuJNLk8V6AejGwuYq1CdgCyVgi2BgyQYvswCUO373tBkW3P8eBHj5-ILIeNawhcoq9CQKGweq_wKDUHK1wO2YudqzykfULBBmBb4DyU1Ft-cwX3tXVSVeCrcxnffADNwA-62EKknvT06_CAn1slYiPx6TK_c_a0v20ccWZ1Yy08OKx4FJA"
+            />
+
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div
+                class="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform duration-300"
+              >
+                <span
+                  class="material-symbols-outlined text-white"
+                  style="font-variation-settings: 'FILL' 1;"
+                >
+                  play_arrow
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="relative aspect-video md:aspect-auto md:h-full rounded-2xl overflow-hidden bg-inverse-surface group cursor-pointer border border-outline-variant/20"
+          >
+            <img
+              alt="Clip 2"
+              class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWvbirK4ISdTGIh8jG5ix5zVEwshZEZ-ZcuxLaFgHcYNMjCaKav0OhXThJy1_Z1-kUEPusJsLlqmDTPHm5ZVSC0LIOja-S5Z6wYWoQFGycXwakz6_Hfk3mR59PPT-QbZpKCdaG8_M-0UnMdevAwxNnsDvpJ_bQby492ayZvipbyD6M4aGvU99DhCJQ58bbZuNQRm9sgwaUuT0bbp9Aqf6t_1wyJ6T3zkqGnS6sVQimCHO6xVtxRo75rA"
+            />
+
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div
+                class="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform duration-300"
+              >
+                <span
+                  class="material-symbols-outlined text-white"
+                  style="font-variation-settings: 'FILL' 1;"
+                >
+                  play_arrow
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Cast & Crew -->
+    <section class="mb-24">
+      <h2
+        class="font-headline text-3xl font-medium text-on-surface mb-8 border-b border-outline-variant/40 pb-4"
+      >
+        Movie Team
+      </h2>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
+
+        <!-- Cast Member 1 -->
+        <div class="flex flex-col items-center text-center space-y-4">
+          <div
+            class="w-28 h-28 rounded-full overflow-hidden border-2 border-surface-container-highest shadow-sm"
+          >
+            <img
+              alt="Deva"
+              class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUU2PjysWC6Cb9GkBX3mYU_yvdRzdeamO5rjZ_LuDC6PZmbMKqqWoAj6sw6d6aCh2O22FUp2JO4NWYSpKAN_euI-bRlju1U7qX2VrflJGxaHt9TNcFvh0KvzvKXKSa9n0lYT-noWj24tjcq5fxUyWscxvmwa2Nbtbh7J-wQu9zrvozXLP-KMM6rX9RIqg8HD1vpmN_gX-s6weoM2X3zn3KFYDqx-Az2Ycj5Mm-tkWGVamJdjcGxheukA"
+            />
+          </div>
+
+          <div>
+            <h4 class="font-headline text-lg font-medium text-on-surface">
+              Deva
+            </h4>
+            <p class="font-body text-sm text-on-surface-variant">
+              Justin
+            </p>
+          </div>
+        </div>
+
+        <!-- Cast Member 2 -->
+        <div class="flex flex-col items-center text-center space-y-4">
+          <div
+            class="w-28 h-28 rounded-full overflow-hidden border-2 border-surface-container-highest shadow-sm"
+          >
+            <img
+              alt="Deepak"
+              class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVDmy8e9UvBpAKDA34phnZeYhgeEGfLoYmbIm1mE751eePKu4PAE1LXtNs2SpBTRZkK5JCCYtiulHogm5wksRPtzT2qiHRLfFY8i9QrRKic-DP6B7LnhGDPi6oEGoSOtOGAQwuqzVRmWG5yxJe1zLsSPtVZdbG2NMj38hsZ4uVrVXPKcmmYu5Crtbt14TuEhJdXoF5oAIIvKk7nrRrEaBYKaHohXLOGRvaGQQTaKumXLPRlUXWH5LbxA"
+            />
+          </div>
+
+          <div>
+            <h4 class="font-headline text-lg font-medium text-on-surface">
+              Deepak
+            </h4>
+            <p class="font-body text-sm text-on-surface-variant">
+              Age 23
+            </p>
+          </div>
+        </div>
+
+        <!-- Director Placeholder -->
+        <div class="flex flex-col items-center text-center space-y-4 opacity-70">
+          <div
+            class="w-28 h-28 rounded-full bg-surface-container-high flex items-center justify-center border-2 border-surface-container-highest shadow-sm"
+          >
+            <span class="material-symbols-outlined text-outline text-4xl">
+              person
+            </span>
+          </div>
+
+          <div>
+            <h4 class="font-headline text-lg font-medium text-on-surface">
+              Director
+            </h4>
+            <p class="font-body text-sm text-on-surface-variant">
+              TBA
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer
+    class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-6 bg-surface-container-highest dark:bg-surface-container-highest border-t border-outline-variant/60"
+  >
+    <div class="font-headline text-xl font-bold text-primary">
+      Sahara
+    </div>
+
+    <ul class="flex flex-wrap justify-center gap-6 font-body text-sm text-on-surface-variant">
+      <li>
+        <a class="hover:text-tertiary transition-colors" href="#">
+          Privacy Policy
+        </a>
+      </li>
+
+      <li>
+        <a class="hover:text-tertiary transition-colors" href="#">
+          Terms of Service
+        </a>
+      </li>
+
+      <li>
+        <a class="hover:text-tertiary transition-colors" href="#">
+          Press Kit
+        </a>
+      </li>
+
+      <li>
+        <a class="hover:text-tertiary transition-colors" href="#">
+          Contact
+        </a>
+      </li>
+    </ul>
+
+    <div class="flex items-center gap-4 text-on-surface-variant">
+      <a
+        aria-label="Instagram"
+        class="hover:text-primary transition-colors"
+        href="#"
+      >
+        <span class="material-symbols-outlined">photo_camera</span>
+      </a>
+
+      <a
+        aria-label="Facebook"
+        class="hover:text-primary transition-colors"
+        href="#"
+      >
+        <span class="material-symbols-outlined">public</span>
+      </a>
+
+      <a
+        aria-label="YouTube"
+        class="hover:text-primary transition-colors"
+        href="#"
+      >
+        <span class="material-symbols-outlined">smart_display</span>
+      </a>
+    </div>
+
+    <div
+      class="w-full md:w-auto text-center md:text-right font-body text-xs text-on-surface-variant mt-4 md:mt-0"
+    >
+      © 2024 Sahara Cinema Collective. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

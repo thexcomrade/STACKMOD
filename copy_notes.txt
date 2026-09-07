@@ -1,0 +1,5 @@
+Definition: HTML ennu parayunnathu webpagesinte structure create cheyyan use cheyyunna standard markup
+language aanu. HTML programming language alla; tags use cheyth content browserinu describe cheyyunnu.
+Important points:
+HTML file extension .html or .htm aanu.
+Browser HTML parse cheyth webpage render cheyyum.hai how are you?hai how are you?hai how are you?hai how are you?hai how are you?hai how are you?hai how are you?hai how are you?hai how are you?hai how are you?hai how are you?hai how are you?hai how are you?
