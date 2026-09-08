@@ -1,1 +1,90 @@
-<!-- BOOKING PAGE -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bethlehem Kudumba Unit - Booking</title>
+</head>
+<body style="margin:0;padding:24px 16px;background:#dfc79e;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#2c221e;">
+<main style="max-width:860px;margin:auto;display:flex;flex-direction:column;gap:24px;">
+
+<header style="text-align:center;">
+<span style="display:inline-block;padding:4px 14px;background:#fff;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1px;color:#8c5627;text-transform:uppercase;">NOW SHOWING</span>
+<h1 style="margin:12px 0 6px;font-size:32px;color:#1d1511;">Bethlehem Kudumba Unit</h1>
+<p style="margin:0;font-size:14px;color:#6b5a51;">2026 • 2h 37m • Malayalam Comedy / Drama</p>
+</header>
+
+<section style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px #00000014;border:1px solid #d4bda0;">
+<div style="width:100%;height:340px;background:#eae0d2;overflow:hidden;">
+<img src="https://cdn.dnaindia.com/sites/default/files/2026/09/07/2757911-bku-final.jpg?im=FitAndFill=(640,480)" alt="Movie Poster" style="width:100%;height:100%;object-fit:cover;display:block;">
+</div>
+<div style="padding:24px 28px;">
+<p style="font-family:'Times New Roman',Times,serif;font-size:16px;line-height:1.7;color:#555;margin:0;">
+<b style="font-size:21px;">A</b> heartwarming Malayalam romantic comedy about Ashley, who returns from abroad and unexpectedly reconnects with her first love, Justin. When a wedding nearby brings old memories back to life, their relationship takes a new turn filled with love, laughter, family moments, and unexpected challenges.
+</p>
+</div>
+</section>
+
+<section style="background:#fff;border-radius:16px;padding:28px 32px;box-shadow:0 4px 16px #00000014;border:1px solid #d4bda0;">
+<h2 style="margin:0 0 20px;font-size:22px;color:#221814;border-bottom:2px solid #ecdcc8;padding-bottom:10px;">🎟️ Book Your Ticket</h2>
+
+<form action="" method="post" enctype="multipart/form-data" style="display:flex;flex-direction:column;gap:18px;">
+
+<div style="display:flex;gap:16px;flex-wrap:wrap;">
+<div style="flex:1;min-width:220px;">
+<label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Full Name</label>
+<input name="name" type="text" placeholder="Enter your name" required style="width:100%;box-sizing:border-box;padding:10px 14px;border:1px solid #cfc0af;border-radius:8px;background:#faf7f2;">
+</div>
+<div style="width:140px;">
+<label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Age</label>
+<input name="age" type="number" min="1" max="120" placeholder="Age" required style="width:100%;box-sizing:border-box;padding:10px 14px;border:1px solid #cfc0af;border-radius:8px;background:#faf7f2;">
+</div>
+</div>
+
+<div>
+<label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Gender</label>
+<div style="display:flex;gap:18px;font-size:14px;">
+<label><input name="gender" type="radio" value="male"> Male</label>
+<label><input name="gender" type="radio" value="female"> Female</label>
+<label><input name="gender" type="radio" value="other"> Other</label>
+</div>
+</div>
+
+<div>
+<label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Address</label>
+<textarea name="address" placeholder="Enter your address" rows="3" style="width:100%;box-sizing:border-box;padding:10px 14px;border:1px solid #cfc0af;border-radius:8px;background:#faf7f2;resize:vertical;"></textarea>
+</div>
+
+<div>
+<label style="display:block;font-size:13px;font-weight:600;margin-bottom:8px;">Select Seat(s)</label>
+<div style="display:flex;flex-direction:column;gap:8px;background:#faf7f2;padding:14px;border-radius:10px;border:1px dashed #cfc0af;">
+<div style="display:flex;gap:20px;font-size:14px;"><b>Row A:</b><label><input name="seat_no" type="checkbox" value="A1"> A1</label><label><input name="seat_no" type="checkbox" value="A2"> A2</label><label><input name="seat_no" type="checkbox" value="A3"> A3</label></div>
+<div style="display:flex;gap:20px;font-size:14px;"><b>Row B:</b><label><input name="seat_no" type="checkbox" value="B1"> B1</label><label><input name="seat_no" type="checkbox" value="B2"> B2</label><label><input name="seat_no" type="checkbox" value="B3"> B3</label></div>
+<div style="display:flex;gap:20px;font-size:14px;"><b>Row C:</b><label><input name="seat_no" type="checkbox" value="C1"> C1</label><label><input name="seat_no" type="checkbox" value="C2"> C2</label><label><input name="seat_no" type="checkbox" value="C3"> C3</label></div>
+</div>
+</div>
+
+<div>
+<label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Add-on Snacks</label>
+<div style="display:flex;gap:18px;font-size:14px;background:#faf7f2;padding:12px;border-radius:8px;border:1px solid #ecdcc8;">
+<label><input name="food" type="checkbox" value="popcorn"> 🍿 Popcorn</label>
+<label><input name="food" type="checkbox" value="soda"> 🥤 Soda</label>
+<label><input name="food" type="checkbox" value="nachos"> 🧀 Nachos</label>
+</div>
+</div>
+
+<div>
+<label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Upload ID / Document</label>
+<input name="file_choose" type="file" style="font-size:13px;">
+</div>
+
+<div style="display:flex;gap:12px;padding-top:10px;border-top:1px solid #eee;">
+<input type="submit" value="Confirm & Book" style="padding:12px 24px;background:#8c5627;color:#fff;border:0;border-radius:8px;font-weight:700;cursor:pointer;">
+<input type="reset" value="Clear Form" style="padding:12px 20px;background:#ecdcc8;color:#53433a;border:1px solid #cfc0af;border-radius:8px;font-weight:600;cursor:pointer;">
+</div>
+
+</form>
+</section>
+</main>
+</body>
+</html>
