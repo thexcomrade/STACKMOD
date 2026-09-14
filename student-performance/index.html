@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Performance Analytics</title>
+
+<!-- PDF Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --text: #172033;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --green: #16a34a;
+    --red: #dc2626;
+    --orange: #ea580c;
+    --purple: #7c3aed;
+}
+
+body {
+    font-family: Inter, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+
+/* ===============================
+   HEADER
+================================ */
+
+.header {
+    height: 72px;
+    background: #111827;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 28px;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--primary);
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+.logo h1 {
+    font-size: 18px;
+}
+
+.logo p {
+    font-size: 11px;
+    color: #9ca3af;
+    margin-top: 2px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* ===============================
+   BUTTONS
+================================ */
+
+button {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn {
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+.btn-light {
+    background: white;
+    color: #111827;
+}
+
+.btn-danger {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.btn-success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+
+/* ===============================
+   LAYOUT
+================================ */
+
+.layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    min-height: calc(100vh - 72px);
+}
+
+
+/* ===============================
+   ASIDE / REPORT
+================================ */
+
+aside {
+    background: white;
+    border-right: 1px solid var(--border);
+    padding: 24px;
+
+    position: sticky;
+    top: 72px;
+    height: calc(100vh - 72px);
+
+    overflow-y: auto;
+}
+
+.aside-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.aside-subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 22px;
+}
+
+.report-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.report-row {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.report-row:last-child {
+    border-bottom: none;
+}
+
+.report-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 4px;
+}
+
+.report-value {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.report-actions {
+    display: grid;
+    gap: 9px;
+}
+
+.report-actions button {
+    width: 100%;
+}
+
+
+/* ===============================
+   MAIN
+================================ */
+
+main {
+    padding: 28px;
+    max-width: 1500px;
+    width: 100%;
+    margin: auto;
+}
+
+.page-heading {
+    margin-bottom: 25px;
+}
+
+.page-heading h2 {
+    font-size: 27px;
+    margin-bottom: 5px;
+}
+
+.page-heading p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+
+/* ===============================
+   LIVE STATUS
+================================ */
+
+.live-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-top: 12px;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    background: #dcfce7;
+    color: #166534;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.live-dot {
+    width: 7px;
+    height: 7px;
+
+    background: #16a34a;
+    border-radius: 50%;
+}
+
+
+/* ===============================
+   STAT GRID
+================================ */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+
+    margin-bottom: 25px;
+}
+
+.stat {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 19px;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.stat-number {
+    font-size: 28px;
+    font-weight: 800;
+    margin-top: 7px;
+}
+
+
+/* ===============================
+   CARDS
+================================ */
+
+.card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 22px;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 19px 20px;
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.card-title {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.card-description {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+
+/* ===============================
+   EDITOR
+================================ */
+
+.editor-tools {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 950px;
+}
+
+th {
+    background: #f8fafc;
+    font-size: 11px;
+    color: #64748b;
+
+    padding: 13px;
+
+    text-align: left;
+
+    border-bottom: 1px solid var(--border);
+}
+
+td {
+    padding: 9px;
+    border-bottom: 1px solid #eef2f7;
+}
+
+input {
+    width: 100%;
+
+    border: 1px solid transparent;
+    background: transparent;
+
+    padding: 8px;
+
+    border-radius: 6px;
+
+    font-family: inherit;
+    font-size: 13px;
+}
+
+input:hover {
+    background: #f8fafc;
+}
+
+input:focus {
+    outline: none;
+    border-color: #93c5fd;
+    background: white;
+}
+
+.number-input {
+    width: 70px;
+}
+
+.student-input {
+    min-width: 110px;
+    font-weight: 600;
+}
+
+.delete-btn {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 7px;
+
+    background: #fee2e2;
+    color: #dc2626;
+
+    font-weight: bold;
+}
+
+
+/* ===============================
+   TOP STUDENT
+================================ */
+
+.top-student {
+    padding: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: linear-gradient(
+        135deg,
+        #eff6ff,
+        #eef2ff
+    );
+}
+
+.top-person {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar {
+    width: 58px;
+    height: 58px;
+
+    background: var(--primary);
+    color: white;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.top-name {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.top-label {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.top-score {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+
+/* ===============================
+   SUBJECT GRID
+================================ */
+
+.subject-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    padding: 20px;
+}
+
+.subject {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 17px;
+}
+
+.subject-name {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.subject-score {
+    font-size: 25px;
+    font-weight: 800;
+    margin-top: 5px;
+}
+
+.subject-small {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+
+/* ===============================
+   REPORT CONTENT
+================================ */
+
+.report-content {
+    padding: 25px;
+}
+
+.report-content h3 {
+    margin-bottom: 12px;
+}
+
+.report-content p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #4b5563;
+}
+
+
+/* ===============================
+   INSIGHTS
+================================ */
+
+.insights {
+    padding: 20px;
+
+    display: grid;
+    gap: 10px;
+}
+
+.insight {
+    background: #f8fafc;
+    border-left: 4px solid var(--primary);
+
+    padding: 13px;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* ===============================
+   MODAL / DOCS EDITOR
+================================ */
+
+.modal {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(15, 23, 42, 0.65);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 500;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-box {
+    background: white;
+
+    width: 900px;
+    max-width: 100%;
+
+    max-height: 90vh;
+
+    border-radius: 14px;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+.modal-header {
+    padding: 17px 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header h2 {
+    font-size: 18px;
+}
+
+.close-btn {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 7px;
+
+    background: #f3f4f6;
+
+    font-size: 18px;
+}
+
+.document-editor {
+    padding: 25px;
+
+    overflow-y: auto;
+}
+
+.document-editor input,
+.document-editor textarea {
+    border: 1px solid var(--border);
+    background: white;
+
+    width: 100%;
+
+    padding: 10px;
+
+    margin-bottom: 15px;
+}
+
+.document-editor textarea {
+    min-height: 100px;
+    resize: vertical;
+
+    font-family: inherit;
+    line-height: 1.6;
+}
+
+.document-actions {
+    padding: 15px 20px;
+
+    border-top: 1px solid var(--border);
+
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media(max-width:1100px) {
+
+    .layout {
+        grid-template-columns: 250px 1fr;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .subject-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+@media(max-width:750px) {
+
+    .header {
+        height: auto;
+        padding: 15px;
+        gap: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .layout {
+        display: block;
+    }
+
+    aside {
+        position: relative;
+        top: 0;
+        height: auto;
+
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    main {
+        padding: 18px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .subject-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media(max-width:450px) {
+
+    .subject-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .top-student {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ==========================================================
+     HEADER
+=========================================================== -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            SP
+        </div>
+
+        <div>
+            <h1>Student Performance</h1>
+            <p>Analytics Dashboard</p>
+        </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+        <button
+            class="btn btn-light"
+            onclick="openDocsEditor()">
+
+            ✏️ Edit Report
+
+        </button>
+
+        <button
+            class="btn btn-primary"
+            onclick="downloadPDF()">
+
+            📄 Download PDF
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<div class="layout">
+
+
+<!-- ==========================================================
+     LEFT REPORT ASIDE
+=========================================================== -->
+
+<aside>
+
+    <div class="aside-title">
+        Student Performance Report
+    </div>
+
+    <div class="aside-subtitle">
+        Live generated report
+    </div>
+
+
+    <div class="report-card">
+
+        <div class="report-row">
+            <div class="report-label">
+                Total Students
+            </div>
+
+            <div
+                class="report-value"
+                id="asideStudents">
+                0
+            </div>
+        </div>
+
+
+        <div class="report-row">
+            <div class="report-label">
+                Total Subjects
+            </div>
+
+            <div
+                class="report-value"
+                id="asideSubjects">
+                0
+            </div>
+        </div>
+
+
+        <div class="report-row">
+            <div class="report-label">
+                Highest Mark
+            </div>
+
+            <div
+                class="report-value"
+                id="asideHighest">
+                0
+            </div>
+        </div>
+
+
+        <div class="report-row">
+            <div class="report-label">
+                Lowest Mark
+            </div>
+
+            <div
+                class="report-value"
+                id="asideLowest">
+                0
+            </div>
+        </div>
+
+
+        <div class="report-row">
+            <div class="report-label">
+                Top Student
+            </div>
+
+            <div
+                class="report-value"
+                id="asideTop">
+                -
+            </div>
+        </div>
+
+
+        <div class="report-row">
+            <div class="report-label">
+                Top Average
+            </div>
+
+            <div
+                class="report-value"
+                id="asideTopAverage">
+                0
+            </div>
+        </div>
+
+
+        <div class="report-row">
+            <div class="report-label">
+                Passed
+            </div>
+
+            <div
+                class="report-value"
+                id="asidePassed">
+                0
+            </div>
+        </div>
+
+
+        <div class="report-row">
+            <div class="report-label">
+                Failed
+            </div>
+
+            <div
+                class="report-value"
+                id="asideFailed">
+                0
+            </div>
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- ==========================================================
+     MAIN CONTENT
+=========================================================== -->
+
+<main id="dashboard">
+
+
+    <div class="page-heading">
+
+        <h2>
+            Student Performance Analytics
+        </h2>
+
+        <div class="live-status">
+
+            <span class="live-dot"></span>
+
+            LIVE PERFORMANCE
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ======================================================
+         STATISTICS
+    ======================================================= -->
+
+    <section class="stats">
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                TOTAL STUDENTS
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalStudents">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                TOTAL SUBJECTS
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalSubjects">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                HIGHEST MARK
+            </div>
+
+            <div
+                class="stat-number"
+                id="highestMark">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                LOWEST MARK
+            </div>
+
+            <div
+                class="stat-number"
+                id="lowestMark">
+                0
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         EDITABLE DATA
+    ======================================================= -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div>
+
+                <div class="card-title">
+                    Student Performance Data
+                </div>
+
+                <div class="card-description">
+                    Edit names and marks directly in the table.
+                    All calculations update instantly.
+                </div>
+
+            </div>
+
+
+            <div class="editor-tools">
+
+                <!-- <button
+                    class="btn btn-success"
+                    onclick="addStudent()">
+
+                    + Add Student
+
+                </button> -->
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>Student</th>
+
+                        <th>Python</th>
+
+                        <th>SQL</th>
+
+                        <th>Excel</th>
+
+                        <th>Statistics</th>
+
+                        <th>PowerBI</th>
+
+                        <th>Total</th>
+
+                        <th>Average</th>
+
+                        <th>Result</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="studentTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         TOP STUDENT
+    ======================================================= -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div>
+
+                <div class="card-title">
+                    Top Performing Student
+                </div>
+
+                <div class="card-description">
+                    Automatically calculated from average marks
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="top-student">
+
+            <div class="top-person">
+
+                <div
+                    class="avatar"
+                    id="topAvatar">
+                    -
+                </div>
+
+                <div>
+
+                    <div
+                        class="top-name"
+                        id="topStudent">
+                        -
+                    </div>
+
+                    <div class="top-label">
+                        Highest Overall Average
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="top-score"
+                id="topAverage">
+                0
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         SUBJECT PERFORMANCE
+    ======================================================= -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div>
+
+                <div class="card-title">
+                    Subject Performance
+                </div>
+
+                <div class="card-description">
+                    Live subject-wise average
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="subject-grid"
+            id="subjectGrid">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         INSIGHTS
+    ======================================================= -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div>
+
+                <div class="card-title">
+                    Project Insights
+                </div>
+
+                <div class="card-description">
+                    Generated automatically from the data
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="insights"
+            id="insights">
+
+        </div>
+
+    </section>
+
+
+</main>
+
+</div>
+
+
+
+<!-- ==========================================================
+     DOCUMENT EDITOR MODAL
+=========================================================== -->
+
+<div
+    class="modal"
+    id="docsModal">
+
+    <div class="modal-box">
+
+
+        <div class="modal-header">
+
+            <h2>
+                Edit Student Performance Report
+            </h2>
+
+            <button
+                class="close-btn"
+                onclick="closeDocsEditor()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div class="document-editor">
+
+
+            <label>
+                Report Title
+            </label>
+
+            <input
+                id="docTitle"
+                value="Student Performance Report">
+
+
+            <label>
+                Report Introduction
+            </label>
+
+            <textarea
+                id="docIntroduction">This report presents the academic performance of students across Python, SQL, Excel, Statistics and PowerBI.</textarea>
+
+
+            <label>
+                Additional Notes
+            </label>
+
+            <textarea
+                id="docNotes">The performance analysis is generated automatically from the student marks dataset.</textarea>
+
+
+            <h3 style="margin:20px 0 10px;">
+                Live Report Data
+            </h3>
+
+            <div id="editableReportData">
+            </div>
+
+
+        </div>
+
+
+        <div class="document-actions">
+
+            <button
+                class="btn btn-light"
+                onclick="closeDocsEditor()">
+
+                Cancel
+
+            </button>
+
+            <button
+                class="btn btn-success"
+                onclick="saveDocument()">
+
+                Save Changes
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* ============================================================
+   DATA
+============================================================ */
+
+let students = [
+    "Arun",
+    "Anu",
+    "Rahul",
+    "Meera",
+    "Amal",
+    "Diya",
+    "Vishnu",
+    "Sneha",
+    "Akhil",
+    "Fathima"
+];
+
+
+let marks = [
+    [78, 85, 72, 80, 88],
+    [92, 89, 95, 90, 94],
+    [65, 70, 68, 72, 75],
+    [88, 84, 91, 86, 90],
+    [55, 62, 58, 60, 65],
+    [76, 80, 74, 78, 82],
+    [45, 52, 48, 55, 50],
+    [90, 94, 89, 92, 96],
+    [68, 73, 70, 65, 72],
+    [82, 87, 85, 80, 89]
+];
+
+
+const subjects = [
+    "Python",
+    "SQL",
+    "Excel",
+    "Statistics",
+    "PowerBI"
+];
+
+
+/* ============================================================
+   CALCULATE DATA
+============================================================ */
+
+function calculate() {
+
+    const totals = marks.map(row =>
+        row.reduce(
+            (sum, value) => sum + Number(value),
+            0
+        )
+    );
+
+
+    const averages = totals.map(
+        (total, index) =>
+            total / marks[index].length
+    );
+
+
+    const allMarks = marks.flat().map(Number);
+
+
+    const highest =
+        allMarks.length
+            ? Math.max(...allMarks)
+            : 0;
+
+
+    const lowest =
+        allMarks.length
+            ? Math.min(...allMarks)
+            : 0;
+
+
+    let topIndex = 0;
+    let lowIndex = 0;
+
+
+    if (averages.length) {
+
+        topIndex =
+            averages.indexOf(
+                Math.max(...averages)
+            );
+
+        lowIndex =
+            averages.indexOf(
+                Math.min(...averages)
+            );
+
+    }
+
+
+    const results = averages.map(
+        avg =>
+            avg >= 50
+                ? "Pass"
+                : "Fail"
+    );
+
+
+    return {
+        totals,
+        averages,
+        highest,
+        lowest,
+        topIndex,
+        lowIndex,
+        results
+    };
+
+}
+
+
+/* ============================================================
+   RENDER EVERYTHING
+============================================================ */
+
+function render() {
+
+    const data = calculate();
+
+
+    /* -------------------------
+       BASIC STATISTICS
+    -------------------------- */
+
+    document.getElementById(
+        "totalStudents"
+    ).textContent = students.length;
+
+
+    document.getElementById(
+        "totalSubjects"
+    ).textContent = subjects.length;
+
+
+    document.getElementById(
+        "highestMark"
+    ).textContent = data.highest;
+
+
+    document.getElementById(
+        "lowestMark"
+    ).textContent = data.lowest;
+
+
+    /* -------------------------
+       ASIDE REPORT
+    -------------------------- */
+
+    document.getElementById(
+        "asideStudents"
+    ).textContent = students.length;
+
+
+    document.getElementById(
+        "asideSubjects"
+    ).textContent = subjects.length;
+
+
+    document.getElementById(
+        "asideHighest"
+    ).textContent = data.highest;
+
+
+    document.getElementById(
+        "asideLowest"
+    ).textContent = data.lowest;
+
+
+    if (students.length) {
+
+        document.getElementById(
+            "asideTop"
+        ).textContent =
+            students[data.topIndex];
+
+
+        document.getElementById(
+            "asideTopAverage"
+        ).textContent =
+            data.averages[
+                data.topIndex
+            ].toFixed(1);
+
+    }
+    else {
+
+        document.getElementById(
+            "asideTop"
+        ).textContent = "-";
+
+
+        document.getElementById(
+            "asideTopAverage"
+        ).textContent = "0";
+
+    }
+
+
+    document.getElementById(
+        "asidePassed"
+    ).textContent =
+        data.results.filter(
+            r => r === "Pass"
+        ).length;
+
+
+    document.getElementById(
+        "asideFailed"
+    ).textContent =
+        data.results.filter(
+            r => r === "Fail"
+        ).length;
+
+
+
+    /* -------------------------
+       STUDENT TABLE
+    -------------------------- */
+
+    const table =
+        document.getElementById(
+            "studentTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    students.forEach(
+        (student, index) => {
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+
+                <td>
+
+                    <input
+                        class="student-input"
+                        value="${student}"
+                        onchange="updateName(${index}, this.value)"
+                    >
+
+                </td>
+
+
+                ${marks[index].map(
+                    (mark, subjectIndex) => `
+
+                    <td>
+
+                        <input
+                            class="number-input"
+                            type="number"
+                            min="0"
+                            max="100"
+                            value="${mark}"
+                            onchange="updateMark(
+                                ${index},
+                                ${subjectIndex},
+                                this.value
+                            )"
+                        >
+
+                    </td>
+
+                `).join("")}
+
+
+                <td>
+                    <strong>
+                        ${data.totals[index]}
+                    </strong>
+                </td>
+
+
+                <td>
+                    <strong>
+                        ${data.averages[index].toFixed(1)}
+                    </strong>
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="badge"
+                        style="
+                        padding:5px 9px;
+                        border-radius:15px;
+                        background:
+                        ${data.results[index] === "Pass"
+                            ? "#dcfce7"
+                            : "#fee2e2"};
+                        color:
+                        ${data.results[index] === "Pass"
+                            ? "#166534"
+                            : "#991b1b"};
+                        font-size:11px;
+                        font-weight:bold;
+                        ">
+
+                        ${data.results[index]}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteStudent(${index})">
+
+                        ×
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+    );
+
+
+    /* -------------------------
+       TOP STUDENT
+    -------------------------- */
+
+    if (students.length) {
+
+        document.getElementById(
+            "topStudent"
+        ).textContent =
+            students[data.topIndex];
+
+
+        document.getElementById(
+            "topAverage"
+        ).textContent =
+            data.averages[
+                data.topIndex
+            ].toFixed(1);
+
+
+        document.getElementById(
+            "topAvatar"
+        ).textContent =
+            students[
+                data.topIndex
+            ].charAt(0).toUpperCase();
+
+    }
+    else {
+
+        document.getElementById(
+            "topStudent"
+        ).textContent = "No students";
+
+
+        document.getElementById(
+            "topAverage"
+        ).textContent = "0";
+
+
+        document.getElementById(
+            "topAvatar"
+        ).textContent = "-";
+
+    }
+
+
+    renderSubjects();
+
+    renderInsights();
+
+}
+
+
+/* ============================================================
+   SUBJECT PERFORMANCE
+============================================================ */
+
+function renderSubjects() {
+
+    const grid =
+        document.getElementById(
+            "subjectGrid"
+        );
+
+
+    grid.innerHTML = "";
+
+
+    subjects.forEach(
+        (subject, column) => {
+
+            let total = 0;
+
+
+            marks.forEach(
+                row => {
+                    total += Number(
+                        row[column]
+                    );
+                }
+            );
+
+
+            const average =
+                marks.length
+                    ? total / marks.length
+                    : 0;
+
+
+            const values =
+                marks.map(
+                    row =>
+                        Number(row[column])
+                );
+
+
+            const highest =
+                values.length
+                    ? Math.max(...values)
+                    : 0;
+
+
+            const lowest =
+                values.length
+                    ? Math.min(...values)
+                    : 0;
+
+
+            const card =
+                document.createElement("div");
+
+
+            card.className = "subject";
+
+
+            card.innerHTML = `
+
+                <div class="subject-name">
+                    ${subject}
+                </div>
+
+                <div class="subject-score">
+                    ${average.toFixed(1)}
+                </div>
+
+                <div class="subject-small">
+
+                    Highest: ${highest}
+                    <br>
+
+                    Lowest: ${lowest}
+
+                </div>
+
+            `;
+
+
+            grid.appendChild(card);
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   INSIGHTS
+============================================================ */
+
+function renderInsights() {
+
+    const container =
+        document.getElementById(
+            "insights"
+        );
+
+
+    const data = calculate();
+
+
+    container.innerHTML = "";
+
+
+    if (!students.length) {
+
+        container.innerHTML = `
+            <div class="insight">
+                No student data available.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    const highPerformers =
+        data.averages.filter(
+            avg => avg > 80
+        ).length;
+
+
+    const highestSubjectIndex =
+        subjects.reduce(
+            (best, subject, index) => {
+
+                let total = 0;
+
+                marks.forEach(
+                    row => {
+                        total += Number(
+                            row[index]
+                        );
+                    }
+                );
+
+                const currentAverage =
+                    marks.length
+                        ? total / marks.length
+                        : 0;
+
+
+                let bestTotal = 0;
+
+                marks.forEach(
+                    row => {
+                        bestTotal += Number(
+                            row[best]
+                        );
+                    }
+                );
+
+
+                const bestAverage =
+                    marks.length
+                        ? bestTotal / marks.length
+                        : 0;
+
+
+                return currentAverage >
+                    bestAverage
+                    ? index
+                    : best;
+
+            },
+            0
+        );
+
+
+    const insights = [
+
+        `${students[data.topIndex]} has the highest overall average with ${data.averages[data.topIndex].toFixed(1)}.`,
+
+        `${students[data.lowIndex]} has the lowest overall average with ${data.averages[data.lowIndex].toFixed(1)}.`,
+
+        `${subjects[highestSubjectIndex]} has the highest subject-wise average.`,
+
+        `${data.results.filter(r => r === "Pass").length} out of ${students.length} students passed.`,
+
+        `${highPerformers} student${highPerformers === 1 ? "" : "s"} have an average above 80.`
+
+    ];
+
+
+    insights.forEach(
+        text => {
+
+            const div =
+                document.createElement("div");
+
+            div.className = "insight";
+
+            div.textContent = text;
+
+            container.appendChild(div);
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   EDIT STUDENT NAME
+============================================================ */
+
+function updateName(index, value) {
+
+    students[index] =
+        value.trim() || "Unnamed Student";
+
+
+    render();
+
+}
+
+
+/* ============================================================
+   EDIT MARK
+============================================================ */
+
+function updateMark(
+    studentIndex,
+    subjectIndex,
+    value
+) {
+
+    let mark =
+        Number(value);
+
+
+    if (isNaN(mark)) {
+        mark = 0;
+    }
+
+
+    mark =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                mark
+            )
+        );
+
+
+    marks[
+        studentIndex
+    ][
+        subjectIndex
+    ] = mark;
+
+
+    render();
+
+}
+
+
+/* ============================================================
+   DELETE STUDENT
+============================================================ */
+
+function deleteStudent(index) {
+
+    if (
+        !confirm(
+            "Delete " +
+            students[index] +
+            "?"
+        )
+    ) {
+        return;
+    }
+
+
+    students.splice(
+        index,
+        1
+    );
+
+
+    marks.splice(
+        index,
+        1
+    );
+
+
+    render();
+
+}
+
+
+/* ============================================================
+   DOCS EDITOR
+============================================================ */
+
+function openDocsEditor() {
+
+    const modal =
+        document.getElementById(
+            "docsModal"
+        );
+
+
+    const data =
+        calculate();
+
+
+    document.getElementById(
+        "editableReportData"
+    ).innerHTML = `
+
+        <div class="report-card">
+
+            <div class="report-row">
+                <div class="report-label">
+                    Total Students
+                </div>
+
+                <div class="report-value">
+                    ${students.length}
+                </div>
+            </div>
+
+
+            <div class="report-row">
+                <div class="report-label">
+                    Total Subjects
+                </div>
+
+                <div class="report-value">
+                    ${subjects.length}
+                </div>
+            </div>
+
+
+            <div class="report-row">
+                <div class="report-label">
+                    Highest Mark
+                </div>
+
+                <div class="report-value">
+                    ${data.highest}
+                </div>
+            </div>
+
+
+            <div class="report-row">
+                <div class="report-label">
+                    Lowest Mark
+                </div>
+
+                <div class="report-value">
+                    ${data.lowest}
+                </div>
+            </div>
+
+
+            <div class="report-row">
+                <div class="report-label">
+                    Top Student
+                </div>
+
+                <div class="report-value">
+                    ${students[data.topIndex] || "-"}
+                </div>
+            </div>
+
+
+            <div class="report-row">
+                <div class="report-label">
+                    Top Student Average
+                </div>
+
+                <div class="report-value">
+                    ${students.length
+                        ? data.averages[
+                            data.topIndex
+                        ].toFixed(1)
+                        : "0"}
+                </div>
+            </div>
+
+        </div>
+
+    `;
+
+
+    modal.classList.add(
+        "active"
+    );
+
+}
+
+
+/* ============================================================
+   CLOSE DOCS
+============================================================ */
+
+function closeDocsEditor() {
+
+    document.getElementById(
+        "docsModal"
+    ).classList.remove(
+        "active"
+    );
+
+}
+
+
+/* ============================================================
+   SAVE DOCUMENT
+============================================================ */
+
+function saveDocument() {
+
+    const title =
+        document.getElementById(
+            "docTitle"
+        ).value;
+
+
+    document.title =
+        title;
+
+
+    closeDocsEditor();
+
+
+    alert(
+        "Report content saved successfully."
+    );
+
+}
+
+
+/* ============================================================
+   PDF DOWNLOAD
+============================================================ */
+
+function downloadPDF() {
+
+    const dashboard =
+        document.getElementById(
+            "dashboard"
+        );
+
+
+    const options = {
+
+        margin: 0.4,
+
+        filename:
+            "Student-Performance-Report.pdf",
+
+        image: {
+            type: "jpeg",
+            quality: 0.98
+        },
+
+        html2canvas: {
+            scale: 2,
+            useCORS: true
+        },
+
+        jsPDF: {
+            unit: "in",
+            format: "a4",
+            orientation: "landscape"
+        }
+
+    };
+
+
+    html2pdf()
+        .set(options)
+        .from(dashboard)
+        .save();
+
+}
+
+
+/* ============================================================
+   INITIAL RENDER
+============================================================ */
+
+render();
+
+</script>
+
+</body>
+</html>
