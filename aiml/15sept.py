@@ -93,15 +93,13 @@ stud = np.array([
 print(stud.T)
 
 # Create a 2D array and compare the original array and transposed array shapes.
-arr8=([
+arr8 = np.array([
     [1,2,3],
     [4,5,6]
 ])
-arr9=([
-    [4,5,6],
-    [1,2,3]
-])
+
 print("Original shape:", arr8.shape)
 print("Transposed shape:", arr8.T.shape)
+
 print("Original array:\n", arr8)
 print("Transposed array:\n", arr8.T)
