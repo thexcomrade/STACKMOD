@@ -76,9 +76,6 @@ print(arr4.reshape(2,2,3))
 arr5=np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20])
 print(arr5.reshape(4,5))
 
-# Create numbers from 1 to 24 and reshape them into a 3×4×2 array.
-
-
 # 4. transpose() – Practical Questions
 # Create a 2×3 matrix and find its transpose.
 # Create a 3×3 matrix and transpose it.
