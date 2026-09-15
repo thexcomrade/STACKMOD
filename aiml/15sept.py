@@ -77,10 +77,31 @@ arr5=np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20])
 print(arr5.reshape(4,5))
 
 # 4. transpose() – Practical Questions
+
 # Create a 2×3 matrix and find its transpose.
-# Create a 3×3 matrix and transpose it.
+arr6 = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+print(arr6.T)
 # Create a student marks matrix with 3 students and 4 subjects. Transpose the matrix.
-# Create a 2×4 array and convert it into a 4×2 array using transpose.
-# Create a sales matrix containing 3 products and 4 months. Find its transpose.
-# Create a 3×2 matrix and find the transpose.
+stud = np.array([
+    [78, 85, 90, 88],
+    [65, 72, 80, 75],
+    [90, 95, 92, 89]
+])
+print(stud.T)
+
 # Create a 2D array and compare the original array and transposed array shapes.
+arr8=([
+    [1,2,3],
+    [4,5,6]
+])
+arr9=([
+    [4,5,6],
+    [1,2,3]
+])
+print("Original shape:", arr8.shape)
+print("Transposed shape:", arr8.T.shape)
+print("Original array:\n", arr8)
+print("Transposed array:\n", arr8.T)
