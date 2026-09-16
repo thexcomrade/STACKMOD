@@ -1,0 +1,315 @@
+import numpy as np
+
+# TASK 1 – Create a 1D Array
+
+marks = np.array([45, 67, 89, 72, 56, 91, 38, 76])
+
+print("Array:", marks)
+print("Dimension:", marks.ndim)
+print("Shape:", marks.shape)
+print("Size:", marks.size)
+print("Data type:", marks.dtype)
+
+
+# TASK 2 – Array Creation Methods
+
+print("5 zeros:", np.zeros(5))
+print("6 ones:", np.ones(6))
+print("10 repeated values of 25:", np.full(10, 25))
+print("Numbers from 10 to 50:", np.arange(10, 51))
+print("Numbers from 2 to 20:", np.arange(2, 21, 2))
+print("5 equally spaced values:", np.linspace(0, 1, 5))
+
+
+# TASK 3 – Student Marks
+
+marks = np.array([78, 65, 89, 92, 56, 74, 81, 69])
+
+print("First mark:", marks[0])
+print("Last mark:", marks[-1])
+print("Third mark:", marks[2])
+print("Second-last mark:", marks[-2])
+print("First three marks:", marks[:3])
+print("Last four marks:", marks[-4:])
+print("Marks from index 2 to index 5:", marks[2:6])
+print("Reverse:", marks[::-1])
+
+
+# TASK 4 – Negative Indexing
+
+numbers = np.array([10, 20, 30, 40, 50, 60, 70])
+
+print("Last element:", numbers[-1])
+print("Second-last element:", numbers[-2])
+print("Third-last element:", numbers[-3])
+print("Last 3 elements:", numbers[-3:])
+print("Reverse:", numbers[::-1])
+
+# TASK 5 – 2D Array Creation
+
+arr = np.array([
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+])
+
+print("Array:")
+print(arr)
+
+print("Dimension:", arr.ndim)
+print("Shape:", arr.shape)
+print("Size:", arr.size)
+print("Data type:", arr.dtype)
+
+
+# TASK 6 – 2D Array Indexing
+
+print("10:", arr[0, 0])
+print("50:", arr[1, 1])
+print("90:", arr[2, 2])
+print("30:", arr[0, 2])
+print("70:", arr[2, 0])
+
+print("First row:", arr[0])
+print("Second row:", arr[1])
+print("Third row:", arr[2])
+
+print("First column:", arr[:, 0])
+print("Last column:", arr[:, -1])
+
+
+# TASK 7 – 2D Array Slicing
+
+arr = np.array([
+    [10, 20, 30, 40],
+    [50, 60, 70, 80],
+    [90, 100, 110, 120]
+])
+
+print("First two rows:")
+print(arr[:2])
+
+print("Last two rows:")
+print(arr[-2:])
+
+print("First two columns:")
+print(arr[:, :2])
+
+print("Last two columns:")
+print(arr[:, -2:])
+
+print("First two rows and first two columns:")
+print(arr[:2, :2])
+
+print("Second and third columns:")
+print(arr[:, 1:3])
+
+print("First and third rows:")
+print(arr[::2])
+
+
+# TASK 8 – Mathematical Operations
+
+A = np.array([10, 20, 30, 40, 50])
+
+print("Add 5:", A + 5)
+print("Subtract 5:", A - 5)
+print("Multiply by 2:", A * 2)
+print("Divide by 10:", A / 10)
+print("Square:", A ** 2)
+
+
+# TASK 9 – Array-to-Array Operations
+
+A = np.array([10, 20, 30, 40, 50])
+
+B = np.array([5, 10, 15, 20, 25])
+
+print("A + B:", A + B)
+print("A - B:", A - B)
+print("A * B:", A * B)
+print("A / B:", A / B)
+
+
+# 2D Array-to-Array Operations
+
+A = np.array([
+    [10, 20],
+    [30, 40]
+])
+
+B = np.array([
+    [1, 2],
+    [3, 4]
+])
+
+print("2D A + B:")
+print(A + B)
+
+print("2D A - B:")
+print(A - B)
+
+print("2D A * B:")
+print(A * B)
+
+print("2D A / B:")
+print(A / B)
+
+
+# TASK 10 – Student Marks Analysis
+
+
+students = np.array([
+    [80, 75, 90],
+    [65, 70, 85],
+    [90, 88, 95],
+    [55, 60, 70]
+])
+
+print("First student's marks:", students[0])
+print("Third student's marks:", students[2])
+print("All students' first subject marks:", students[:, 0])
+print("All students' last subject marks:", students[:, -1])
+print("Second student's second subject mark:", students[1, 1])
+
+print("First two students:")
+print(students[:2])
+
+print("Last two students:")
+print(students[-2:])
+
+
+# TASK 11 – TRANSPOSE
+
+A = np.array([
+    [10, 20, 30],
+    [40, 50, 60]
+])
+
+print("Original array:")
+print(A)
+
+print("Transpose:")
+print(A.T)
+
+print("Original shape:", A.shape)
+print("Transposed shape:", A.T.shape)
+
+print("Original dimensions:", A.ndim)
+print("Transposed dimensions:", A.T.ndim)
+
+
+# TASK - 12 – Student Result Analysis
+
+result = np.array([
+    [101, 80, 75, 90],
+    [102, 65, 70, 85],
+    [103, 90, 88, 95],
+    [104, 55, 60, 70],
+    [105, 78, 82, 80]
+])
+
+
+# A. Array Information
+
+print("Array:")
+print(result)
+
+print("ndim:", result.ndim)
+print("shape:", result.shape)
+print("size:", result.size)
+print("dtype:", result.dtype)
+
+
+# B. Indexing
+
+print("ID of first student:", result[0, 0])
+print("Python mark of student 103:", result[2, 1])
+print("Power BI mark of student 105:", result[4, 3])
+
+print("All Python marks:", result[:, 1])
+print("All Power BI marks:", result[:, 3])
+
+
+# C. Slicing
+
+print("First three students:")
+print(result[:3])
+
+print("Last two students:")
+print(result[-2:])
+
+print("Only the three subject columns:")
+print(result[:, 1:])
+
+print("Python and SQL marks only:")
+print(result[:, 1:3])
+
+
+# D. Mathematical Operations
+
+subject_marks = result[:, 1:]
+
+print("Add 5 bonus marks:")
+print(subject_marks + 5)
+
+print("Multiply subject marks by 2:")
+print(subject_marks * 2)
+
+
+another_marks = np.array([
+    [5, 5, 5],
+    [2, 3, 4],
+    [1, 2, 3],
+    [4, 4, 4],
+    [3, 3, 3]
+])
+
+print("Array-to-array addition:")
+print(subject_marks + another_marks)
+
+
+# E. Transpose
+
+print("Transpose:")
+print(result.T)
+
+print("Shape before transpose:", result.shape)
+print("Shape after transpose:", result.T.shape)
+
+
+# CHALLENGE
+
+challenge = np.array([
+    [10, 20, 30, 40],
+    [50, 60, 70, 80],
+    [90, 100, 110, 120]
+])
+
+print("Challenge array:")
+print(challenge)
+
+print("Dimension:", challenge.ndim)
+print("Shape:", challenge.shape)
+print("Size:", challenge.size)
+
+print("Indexing:", challenge[1, 2])
+print("Negative indexing:", challenge[-1, -1])
+
+print("Slicing:")
+print(challenge[:2, :2])
+
+print("Mathematical operation:")
+print(challenge + 5)
+
+other = np.array([
+    [1, 1, 1, 1],
+    [2, 2, 2, 2],
+    [3, 3, 3, 3]
+])
+
+print("Array-to-array operation:")
+print(challenge + other)
+
+print("Transpose:")
+print(challenge.T)
