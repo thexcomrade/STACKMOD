@@ -21,3 +21,12 @@ print(x)
 print("\nSort by Salary descending")
 y = df.sort_values(by='Salary', ascending=False)
 print(y)
+
+# loc[row_label, col_label]
+print("\nLOC FUNCTION")
+print(df.loc[0, 'Name']) 
+print(df.loc[0:2, ['Name', 'Age']]) 
+# iloc[row_position, col_position]
+print("\nILOC FUNCTION")
+# print(df.iloc[0, 2])
+print(df.iloc[2:4, 1:3])
