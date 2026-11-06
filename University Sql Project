@@ -1,0 +1,443 @@
+create database university;
+
+use university;
+
+-- 1. Departments
+CREATE TABLE departments (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50) NOT NULL
+);
+
+-- 2. Students
+CREATE TABLE students (
+    std_id INT PRIMARY KEY,
+    std_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100),
+    phone VARCHAR(15),
+    dept_id INT,
+    FOREIGN KEY (dept_id)
+        REFERENCES departments(dept_id)
+);
+
+-- 3. Instructors
+CREATE TABLE instructors (
+    inst_id INT PRIMARY KEY,
+    inst_name VARCHAR(50) NOT NULL,
+    dept_id INT,
+    FOREIGN KEY (dept_id)
+        REFERENCES departments(dept_id)
+);
+
+select * from instructors;
+
+-- 4. Courses
+CREATE TABLE courses (
+    course_id INT PRIMARY KEY,
+    course_title VARCHAR(100) NOT NULL,
+    dept_id INT,
+    inst_id INT,
+    FOREIGN KEY (dept_id)
+        REFERENCES departments(dept_id),
+    FOREIGN KEY (inst_id)
+        REFERENCES instructors(inst_id)
+);
+
+-- 5. Enrollments
+CREATE TABLE enrollments (
+    enr_id INT PRIMARY KEY,
+    std_id INT,
+    course_id INT,
+    grade DECIMAL(5,2),
+    FOREIGN KEY (std_id)
+        REFERENCES students(std_id),
+    FOREIGN KEY (course_id)
+        REFERENCES courses(course_id),
+    UNIQUE (std_id, course_id)
+);
+
+-- 6. Class Schedule
+CREATE TABLE class_schedule (
+    schedule_id INT PRIMARY KEY,
+    course_id INT,
+    class_day VARCHAR(15),
+    start_time TIME,
+    end_time TIME,
+    FOREIGN KEY (course_id)
+        REFERENCES courses(course_id)
+);
+
+-- INSERTING VALUES
+
+INSERT INTO departments VALUES
+(1, 'Computer Science'),
+(2, 'Artificial Intelligence'),
+(3, 'Electronics'),
+(4, 'Mechanical'),
+(5, 'Commerce');
+
+INSERT INTO students VALUES
+(1, 'Deva', 'deva@gmail.com', '9876500001', 1),
+(2, 'Arun', 'arun@gmail.com', '9876500002', 2),
+(3, 'Anu', 'anu@gmail.com', '9876500003', 1),
+(4, 'Rahul', 'rahul@gmail.com', '9876500004', 3),
+(5, 'Sivya', 'sivya@gmail.com', '9876500005', 2),
+(6, 'Vivek', 'vivek@gmail.com', '9876500006', 4),
+(7, 'Akhil', 'akhil@gmail.com', '9876500007', 1),
+(8, 'Parvathy', 'parvathy@gmail.com', '9876500008', 5),
+(9, 'Anjana', 'anjana@gmail.com', '9876500009', 3),
+(10, 'Nikhil', 'nikhil@gmail.com', '9876500010', 2);
+
+INSERT INTO instructors VALUES
+(1, 'John', 1),
+(2, 'Mary', 2),
+(3, 'David', 3),
+(4, 'Robert', 4),
+(5, 'Priya', 5);
+
+INSERT INTO courses VALUES
+(1, 'Database Systems', 1, 1),
+(2, 'Python Programming', 1, 1),
+(3, 'Machine Learning', 2, 2),
+(4, 'Deep Learning', 2, 2),
+(5, 'Digital Electronics', 3, 3),
+(6, 'Robotics', 4, 4),
+(7, 'Accounting', 5, 5),
+(8, 'Data Structures', 1, 1);
+
+
+INSERT INTO enrollments VALUES
+(1, 1, 1, 85),
+(2, 1, 2, 90),
+(3, 2, 3, 88),
+(4, 2, 4, 92),
+(5, 3, 1, 78),
+(6, 3, 8, 82),
+(7, 4, 5, 75),
+(8, 5, 3, 95),
+(9, 5, 4, 89),
+(10, 6, 6, 80),
+(11, 7, 1, 87),
+(12, 7, 8, 91),
+(13, 8, 7, 84),
+(14, 9, 5, 79),
+(15, 10, 3, 93);
+
+INSERT INTO class_schedule VALUES
+(1, 1, 'Monday', '09:00:00', '10:00:00'),
+(2, 2, 'Tuesday', '10:00:00', '11:00:00'),
+(3, 3, 'Wednesday', '09:00:00', '10:00:00'),
+(4, 4, 'Thursday', '11:00:00', '12:00:00'),
+(5, 5, 'Friday', '09:00:00', '10:00:00'),
+(6, 6, 'Monday', '13:00:00', '14:00:00'),
+(7, 7, 'Tuesday', '14:00:00', '15:00:00'),
+(8, 8, 'Wednesday', '13:00:00', '14:00:00');
+
+
+-- CRUD OPERATIONS
+
+SELECT * FROM STUDENTS;
+UPDATE STUDENTS SET PHONE = 8078421005 WHERE STD_ID =1;
+
+SELECT * FROM COURSES;
+DELETE FROM class_schedule
+WHERE course_id = 7;
+
+DELETE FROM enrollments
+WHERE course_id = 7;
+
+DELETE FROM courses
+WHERE course_id = 7;
+
+SELECT * FROM courses;
+
+INSERT INTO enrollments
+(enr_id, std_id, course_id, grade)
+VALUES (16, 1, 3, NULL);
+
+SELECT s.std_name, d.dept_name
+FROM students s
+JOIN departments d
+ON s.dept_id = d.dept_id;
+
+SELECT c.course_title
+FROM courses c
+JOIN instructors i
+ON c.inst_id = i.inst_id
+WHERE i.inst_name = 'John';
+
+SELECT s.std_name, c.course_title
+FROM students s
+JOIN enrollments e ON s.std_id = e.std_id
+JOIN courses c ON e.course_id = c.course_id
+WHERE c.course_title = 'Machine Learning';
+
+SELECT d.dept_name, COUNT(s.std_id) AS total_students
+FROM departments d
+LEFT JOIN students s
+ON d.dept_id = s.dept_id
+GROUP BY d.dept_id, d.dept_name;
+
+SELECT i.inst_name, COUNT(c.course_id) AS total_courses
+FROM instructors i
+LEFT JOIN courses c
+ON i.inst_id = c.inst_id
+GROUP BY i.inst_id, i.inst_name;
+
+create database university;
+
+use university;
+
+-- 1. Departments
+CREATE TABLE departments (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50) NOT NULL
+);
+
+-- 2. Students
+CREATE TABLE students (
+    std_id INT PRIMARY KEY,
+    std_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100),
+    phone VARCHAR(15),
+    dept_id INT,
+    FOREIGN KEY (dept_id)
+        REFERENCES departments(dept_id)
+);
+
+-- 3. Instructors
+CREATE TABLE instructors (
+    inst_id INT PRIMARY KEY,
+    inst_name VARCHAR(50) NOT NULL,
+    dept_id INT,
+    FOREIGN KEY (dept_id)
+        REFERENCES departments(dept_id)
+);
+
+select * from instructors;
+
+-- 4. Courses
+CREATE TABLE courses (
+    course_id INT PRIMARY KEY,
+    course_title VARCHAR(100) NOT NULL,
+    dept_id INT,
+    inst_id INT,
+    FOREIGN KEY (dept_id)
+        REFERENCES departments(dept_id),
+    FOREIGN KEY (inst_id)
+        REFERENCES instructors(inst_id)
+);
+
+-- 5. Enrollments
+CREATE TABLE enrollments (
+    enr_id INT PRIMARY KEY,
+    std_id INT,
+    course_id INT,
+    grade DECIMAL(5,2),
+    FOREIGN KEY (std_id)
+        REFERENCES students(std_id),
+    FOREIGN KEY (course_id)
+        REFERENCES courses(course_id),
+    UNIQUE (std_id, course_id)
+);
+
+-- 6. Class Schedule
+CREATE TABLE class_schedule (
+    schedule_id INT PRIMARY KEY,
+    course_id INT,
+    class_day VARCHAR(15),
+    start_time TIME,
+    end_time TIME,
+    FOREIGN KEY (course_id)
+        REFERENCES courses(course_id)
+);
+
+-- INSERTING VALUES
+
+INSERT INTO departments VALUES
+(1, 'Computer Science'),
+(2, 'Artificial Intelligence'),
+(3, 'Electronics'),
+(4, 'Mechanical'),
+(5, 'Commerce');
+
+INSERT INTO students VALUES
+(1, 'Deva', 'deva@gmail.com', '9876500001', 1),
+(2, 'Arun', 'arun@gmail.com', '9876500002', 2),
+(3, 'Anu', 'anu@gmail.com', '9876500003', 1),
+(4, 'Rahul', 'rahul@gmail.com', '9876500004', 3),
+(5, 'Sivya', 'sivya@gmail.com', '9876500005', 2),
+(6, 'Vivek', 'vivek@gmail.com', '9876500006', 4),
+(7, 'Akhil', 'akhil@gmail.com', '9876500007', 1),
+(8, 'Parvathy', 'parvathy@gmail.com', '9876500008', 5),
+(9, 'Anjana', 'anjana@gmail.com', '9876500009', 3),
+(10, 'Nikhil', 'nikhil@gmail.com', '9876500010', 2);
+
+INSERT INTO instructors VALUES
+(1, 'John', 1),
+(2, 'Mary', 2),
+(3, 'David', 3),
+(4, 'Robert', 4),
+(5, 'Priya', 5);
+
+INSERT INTO courses VALUES
+(1, 'Database Systems', 1, 1),
+(2, 'Python Programming', 1, 1),
+(3, 'Machine Learning', 2, 2),
+(4, 'Deep Learning', 2, 2),
+(5, 'Digital Electronics', 3, 3),
+(6, 'Robotics', 4, 4),
+(7, 'Accounting', 5, 5),
+(8, 'Data Structures', 1, 1);
+
+
+INSERT INTO enrollments VALUES
+(1, 1, 1, 85),
+(2, 1, 2, 90),
+(3, 2, 3, 88),
+(4, 2, 4, 92),
+(5, 3, 1, 78),
+(6, 3, 8, 82),
+(7, 4, 5, 75),
+(8, 5, 3, 95),
+(9, 5, 4, 89),
+(10, 6, 6, 80),
+(11, 7, 1, 87),
+(12, 7, 8, 91),
+(13, 8, 7, 84),
+(14, 9, 5, 79),
+(15, 10, 3, 93);
+
+INSERT INTO class_schedule VALUES
+(1, 1, 'Monday', '09:00:00', '10:00:00'),
+(2, 2, 'Tuesday', '10:00:00', '11:00:00'),
+(3, 3, 'Wednesday', '09:00:00', '10:00:00'),
+(4, 4, 'Thursday', '11:00:00', '12:00:00'),
+(5, 5, 'Friday', '09:00:00', '10:00:00'),
+(6, 6, 'Monday', '13:00:00', '14:00:00'),
+(7, 7, 'Tuesday', '14:00:00', '15:00:00'),
+(8, 8, 'Wednesday', '13:00:00', '14:00:00');
+
+
+-- CRUD OPERATIONS
+
+SELECT * FROM STUDENTS;
+UPDATE STUDENTS SET PHONE = 8078421005 WHERE STD_ID =1;
+
+SELECT * FROM COURSES;
+DELETE FROM class_schedule
+WHERE course_id = 7;
+
+DELETE FROM enrollments
+WHERE course_id = 7;
+
+DELETE FROM courses
+WHERE course_id = 7;
+
+SELECT * FROM courses;
+
+INSERT INTO enrollments
+(enr_id, std_id, course_id, grade)
+VALUES (16, 1, 3, NULL);
+
+SELECT s.std_name, d.dept_name
+FROM students s
+JOIN departments d
+ON s.dept_id = d.dept_id;
+
+SELECT c.course_title
+FROM courses c
+JOIN instructors i
+ON c.inst_id = i.inst_id
+WHERE i.inst_name = 'John';
+
+SELECT s.std_name, c.course_title
+FROM students s
+JOIN enrollments e ON s.std_id = e.std_id
+JOIN courses c ON e.course_id = c.course_id
+WHERE c.course_title = 'Machine Learning';
+
+SELECT d.dept_name, COUNT(s.std_id) AS total_students
+FROM departments d
+LEFT JOIN students s
+ON d.dept_id = s.dept_id
+GROUP BY d.dept_id, d.dept_name;
+
+SELECT i.inst_name, COUNT(c.course_id) AS total_courses
+FROM instructors i
+LEFT JOIN courses c
+ON i.inst_id = c.inst_id
+GROUP BY i.inst_id, i.inst_name;
+
+SELECT c.course_title, AVG(e.grade) AS average_grade
+FROM courses c
+JOIN enrollments e
+ON c.course_id = e.course_id
+GROUP BY c.course_id, c.course_title;
+
+SELECT d.dept_name, COUNT(s.std_id) AS total_students
+FROM departments d
+JOIN students s
+ON d.dept_id = s.dept_id
+GROUP BY d.dept_id, d.dept_name
+ORDER BY total_students DESC
+LIMIT 1;
+
+--  PART 5
+
+select s.*
+from students s
+where not exists (
+    select 1
+    from enrollments e
+    where e.std_id = s.std_id
+);
+
+SELECT i.inst_id, i.inst_name,
+       COUNT(c.course_id) AS total_courses
+FROM instructors i
+JOIN courses c
+ON i.inst_id = c.inst_id
+GROUP BY i.inst_id, i.inst_name
+HAVING COUNT(c.course_id) = (
+    SELECT MAX(course_count)
+    FROM (
+        SELECT COUNT(*) AS course_count
+        FROM courses
+        GROUP BY inst_id
+    ) AS temp
+);
+
+SELECT
+    s.std_name,
+    c.course_title,
+    e.grade
+FROM students s
+JOIN enrollments e
+ON s.std_id = e.std_id
+JOIN courses c
+ON e.course_id = c.course_id;
+
+--  PART 6
+
+CREATE INDEX idx_student_name
+ON students(std_name);
+
+CREATE INDEX idx_course_title
+ON courses(course_title);
+
+CREATE VIEW student_performance AS
+SELECT
+    s.std_name,
+    c.course_title,
+    e.grade
+FROM students s
+JOIN enrollments e
+ON s.std_id = e.std_id
+JOIN courses c
+ON e.course_id = c.course_id;
+
+SELECT * FROM student_performance;
+
+SELECT *
+FROM student_performance
+WHERE grade > 85;
